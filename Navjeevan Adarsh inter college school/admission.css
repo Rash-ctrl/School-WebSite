@@ -1,0 +1,123 @@
+  
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+
+    .adm {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #1e3a8a;
+      margin-bottom: 20px;
+      /* border-left: 6px solid #1e3a8a;
+      padding-left: 12px; */
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      color: #374151;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .ul li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 10px;
+    }
+
+    .ul li::before {
+      content: "✔️";
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    dl dt {
+      font-weight: bold;
+      margin-top: 15px;
+      color: #1e3a8a;
+    }
+
+    dl dd {
+      margin-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    /* footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #666;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+    } */
+
+    .card {
+      background-color: #f9fafb;
+      border-left: 4px solid #60a5fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .adm {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+      }
+
+      p, li, dd {
+        font-size: 0.95rem;
+      }
+    }
+  .blackbox{
+    background: linear-gradient(to right, #ff5f5f, #b85ee4);
+    color: #ffffff;
+    text-align: center;
+  }
+  p a{
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+  }
+  p a:hover{
+    text-decoration: underline;
+    color:#333
+  }

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student GK Quiz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .question-container {
+            display: none;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+
+        .options {
+            margin-top: 10px;
+        }
+
+        .option {
+            display: block;
+            margin: 8px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .option:hover {
+            background-color: #e8f4fc;
+        }
+
+        .option.selected {
+            background-color: #d4edff;
+            border-left: 4px solid #3498db;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .result-container {
+            display: none;
+            text-align: center;
+        }
+
+        .result-score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2ecc71;
+            margin: 20px 0;
+        }
+
+        .timer {
+            text-align: right;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("eHIf7SEtiFX7o_vsZ"); // Your EmailJS Public Key
+        })();
+    </script>
+</head>
+<body>
+    <div class="container" id="info-form">
+        <h1>Student GK Quiz</h1>
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required />
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" required />
+        </div>
+        <div class="form-group">
+            <label for="class">Class (1-8)</label>
+            <select id="class" required>
+                <option value="">Select Class</option>
+                <option value="1">Class 1</option>
+                <option value="2">Class 2</option>
+                <option value="3">Class 3</option>
+                <option value="4">Class 4</option>
+                <option value="5">Class 5</option>
+                <option value="6">Class 6</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="school">School Name</label>
+            <input type="text" id="school" required />
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required />
+        </div>
+        <button id="start-btn">Start Quiz</button>
+    </div>
+
+    <div class="container question-container" id="quiz-container">
+        <h2>General Knowledge Quiz</h2>
+        <div class="timer">
+            Time: <span id="time">00:00</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="question" id="question-container">
+            <h3 id="question-text">Question</h3>
+            <div class="options" id="options-container">
+                <!-- Options will be inserted here by JavaScript -->
+            </div>
+        </div>
+        <button id="next-btn" style="display: none;">Next Question</button>
+    </div>
+
+    <div class="container result-container" id="result-container">
+        <h2>Quiz Results</h2>
+        <div id="student-info"></div>
+        <div class="result-score" id="score-display"></div>
+        <div id="time-taken"></div>
+        <button id="send-results">Send Results to Teacher</button>
+        <p id="email-status"></p>
+    </div>
+
+    <script>
+        // Quiz questions (sample - you should add 100 questions)
+        const questions = [
+            {
+                question: "What is the national animal of India?",
+                options: ["Lion", "Tiger", "Elephant", "Cow"],
+                answer: "Tiger",
+            },
+            {
+                question: "What is the capital of India?",
+                options: ["Mumbai", "Delhi", "Kolkata", "Chennai"],
+                answer: "Delhi",
+            },
+            // Add 98 more questions here
+            
+    {
+        question: "What is the capital of India?",
+        options: ["Mumbai", "Delhi", "Kolkata", "Chennai"],
+        answer: "Delhi",
+    },
+    {
+        question: "Which is the national animal of India?",
+        options: ["Lion", "Tiger", "Elephant", "Leopard"],
+        answer: "Tiger",
+    },
+    {
+        question: "Who was the first President of India?",
+        options: ["Jawaharlal Nehru", "Dr. Rajendra Prasad", "A. P. J. Abdul Kalam", "Subhash Chandra Bose"],
+        answer: "Dr. Rajendra Prasad",
+    },
+
+    // Science
+    {
+        question: "Which part of the plant is underground?",
+        options: ["Leaf", "Stem", "Root", "Flower"],
+        answer: "Root",
+    },
+    {
+        question: "Which gas do we breathe in to live?",
+        options: ["Carbon Dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
+        answer: "Oxygen",
+    },
+    {
+        question: "Which sense organ helps us to see?",
+        options: ["Eyes", "Nose", "Skin", "Ears"],
+        answer: "Eyes",
+    },
+
+    // Math
+    {
+        question: "What is 9 + 6?",
+        options: ["14", "15", "16", "13"],
+        answer: "15",
+    },
+    {
+        question: "Which of these is an odd number?",
+        options: ["4", "8", "7", "10"],
+        answer: "7",
+    },
+    {
+        question: "How many sides does a triangle have?",
+        options: ["2", "3", "4", "5"],
+        answer: "3",
+    },
+
+    // Hindi
+    {
+        question: "'नदी' का विलोम शब्द क्या है?",
+        options: ["झील", "जल", "पर्वत", "धार"],
+        answer: "पर्वत",
+    },
+    {
+        question: "'पेड़' से क्या मिलता है?",
+        options: ["दूध", "ऑक्सीजन", "आग", "पत्थर"],
+        answer: "ऑक्सीजन",
+    },
+    {
+        question: "'मैं स्कूल जाता हूँ।' इस वाक्य में क्रिया क्या है?",
+        options: ["मैं", "जाता", "स्कूल", "हूँ"],
+        answer: "जाता",
+    },
+
+    // English
+    {
+        question: "Which word is a noun?",
+        options: ["Quickly", "Jump", "Apple", "Blue"],
+        answer: "Apple",
+    },
+    {
+        question: "What is the opposite of 'Hot'?",
+        options: ["Cold", "Warm", "Heat", "Fire"],
+        answer: "Cold",
+    },
+    {
+        question: "Choose the correct spelling:",
+        options: ["Becase", "Becose", "Because", "Becauss"],
+        answer: "Because",
+    },
+
+    // Computer
+    {
+        question: "Which one is a storage device?",
+        options: ["Keyboard", "Pen Drive", "Monitor", "Printer"],
+        answer: "Pen Drive",
+    },
+    {
+        question: "What does a mouse do?",
+        options: ["Points and clicks on screen", "Types letters", "Prints documents", "Plays music"],
+        answer: "Points and clicks on screen",
+    },
+    {
+        question: "Which of the following is a web browser?",
+        options: ["Windows", "Google Chrome", "MS Paint", "Notepad"],
+        answer: "Google Chrome",
+    },
+
+        ];
+
+        // DOM Elements
+        const infoForm = document.getElementById("info-form");
+        const quizContainer = document.getElementById("quiz-container");
+        const resultContainer = document.getElementById("result-container");
+        const startBtn = document.getElementById("start-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const questionText = document.getElementById("question-text");
+        const optionsContainer = document.getElementById("options-container");
+        const progressBar = document.getElementById("progress");
+        const timeDisplay = document.getElementById("time");
+        const studentInfoDisplay = document.getElementById("student-info");
+        const scoreDisplay = document.getElementById("score-display");
+        const timeTakenDisplay = document.getElementById("time-taken");
+        const sendResultsBtn = document.getElementById("send-results");
+        const emailStatus = document.getElementById("email-status");
+
+        // Quiz variables
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedOption = null;
+        let startTime;
+        let timerInterval;
+        let studentData = {};
+
+        // Start quiz when form is submitted
+        startBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            // Validate form
+            const name = document.getElementById("name").value.trim();
+            const age = document.getElementById("age").value.trim();
+            const classGrade = document.getElementById("class").value;
+            const school = document.getElementById("school").value.trim();
+            const email = document.getElementById("email").value.trim();
+
+            if (!name || !age || !classGrade || !school || !email) {
+                alert("Please fill in all fields");
+                return;
+            }
+
+            // Store student data
+            studentData = {
+                name,
+                age,
+                class: classGrade,
+                school,
+                email,
+            };
+
+            // Hide info form and show quiz
+            infoForm.style.display = "none";
+            quizContainer.style.display = "block";
+
+            // Start timer
+            startTime = new Date();
+            timerInterval = setInterval(updateTimer, 1000);
+
+            // Load first question
+            loadQuestion();
+        });
+
+        // Load a question
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionText.textContent = currentQuestion.question;
+
+            // Clear previous options
+            optionsContainer.innerHTML = "";
+
+            // Add new options
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement("div");
+                optionElement.classList.add("option");
+                optionElement.textContent = option;
+                optionElement.dataset.index = index;
+
+                optionElement.addEventListener("click", () => {
+                    // Remove selected class from all options
+                    document.querySelectorAll(".option").forEach((opt) => {
+                        opt.classList.remove("selected");
+                    });
+
+                    // Add selected class to clicked option
+                    optionElement.classList.add("selected");
+                    selectedOption = option;
+                    nextBtn.style.display = "block";
+                });
+
+                optionsContainer.appendChild(optionElement);
+            });
+
+            // Update progress bar
+            const progress = (currentQuestionIndex / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            // Hide next button until an option is selected
+            nextBtn.style.display = "none";
+        }
+
+        // Next question button
+        nextBtn.addEventListener("click", () => {
+            // Check answer
+            if (selectedOption === questions[currentQuestionIndex].answer) {
+                score++;
+            }
+
+            // Move to next question or end quiz
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < questions.length) {
+                selectedOption = null;
+                loadQuestion();
+            } else {
+                endQuiz();
+            }
+        });
+
+        // Update timer
+        function updateTimer() {
+            const now = new Date();
+            const elapsed = Math.floor((now - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60)
+                .toString()
+                .padStart(2, "0");
+            const seconds = (elapsed % 60).toString().padStart(2, "0");
+            timeDisplay.textContent = `${minutes}:${seconds}`;
+        }
+
+        // End quiz and show results
+        function endQuiz() {
+            clearInterval(timerInterval);
+
+            // Calculate time taken
+            const endTime = new Date();
+            const timeTaken = Math.floor((endTime - startTime) / 1000);
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
+
+            // Calculate percentage
+            const percentage = (score / questions.length) * 100;
+
+            // Display results
+            quizContainer.style.display = "none";
+            resultContainer.style.display = "block";
+
+            studentInfoDisplay.innerHTML = `
+                <p><strong>Name:</strong> ${studentData.name}</p>
+                <p><strong>Age:</strong> ${studentData.age}</p>
+                <p><strong>Class:</strong> ${studentData.class}</p>
+                <p><strong>School:</strong> ${studentData.school}</p>
+                <p><strong>Email:</strong> ${studentData.email}</p>
+            `;
+
+            scoreDisplay.textContent = `Score: ${score}/${questions.length} (${percentage.toFixed(
+                2
+            )}%)`;
+            timeTakenDisplay.textContent = `Time taken: ${minutes}m ${seconds}s`;
+        }
+
+        // Send results via EmailJS
+        sendResultsBtn.addEventListener("click", () => {
+            emailStatus.textContent = "Sending results...";
+            emailStatus.style.color = "blue";
+
+            const percentage = (score / questions.length) * 100;
+            const timeTaken = timeDisplay.textContent;
+
+            emailjs
+                .send("service_harsh@@$$emailjS", "harshtamplateemailjS", {
+                    name: studentData.name,
+                    age: studentData.age,
+                    class: studentData.class,
+                    school: studentData.school,
+                    email: studentData.email,
+                    score: score,
+                    total_questions: questions.length,
+                    percentage: percentage.toFixed(2),
+                    time_taken: timeTaken,
+                })
+                .then(
+                    () => {
+                        emailStatus.textContent =
+                            "Results sent successfully to hjs2743@gmail.com!";
+                        emailStatus.style.color = "green";
+                    },
+                    (error) => {
+                        console.error("EmailJS error:", error);
+                        emailStatus.textContent =
+                            "Error sending results. Please try again.";
+                        emailStatus.style.color = "red";
+                    }
+                );
+        });
+    </script>
+</body>
+</html>

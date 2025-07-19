@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+body{
+    /* display: flex; */
+    background: rgb(255, 255, 255) ;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    color: chocolate;
+    background-image: url("/praction/login/black.jpg");
+    background-size: cover;
+}
+.main{
+    display: flex;
+    border: 1px solid rgb(77, 75, 75);
+    width: 600px;
+    height: auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-left: 00px;
+    border-radius: 10px;
+    flex-direction: column;
+    background-color: #ffffff;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: 25px;
+    /* background: transparent; */
+}
+.main:hover{
+    box-shadow: 12px 12px 12px #575656 ;
+}
+label{
+    display: block;
+    text-align: left;
+    padding-left: 10px;
+    color: rgb(17, 19, 39);
+    margin-left: 10px;
+}
+input{
+    display: block;
+    text-align: left;
+    margin: 3px 0 5px 10px;
+    width: 90%;
+    box-sizing: border-box;
+    border: 1px solid rgb(211, 207, 207);
+    margin-left: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(139, 133, 133, 0.356);
+}
+
+select{
+    display: block;
+    text-align: left; 
+    margin: 3px 0 5px 25px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+h1{
+    color: rgb(240, 62, 106);
+}
+h3{
+    color: coral;
+}
+button{
+    display: block;
+    /* flex-direction: column;
+    justify-content: center; */
+    width: 90%;
+    padding: 15px;
+    margin-top:10px ;
+    background-color: rgb(165, 86, 240);
+    color: white;
+    text-align: center;
+    justify-content: center;
+    margin-left: 15px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border-radius: 40px;
+    
+}
+button:hover{
+    box-shadow: 6px 6px 12px #e757e7;
+    }
+#ok{
+    display:flex ;
+    width: 5%;
+    
+}
+/* form{
+    color: rgb(255, 0, 0);
+} */
+ ::placeholder{
+    color: rgb(138, 101, 101);
+ }

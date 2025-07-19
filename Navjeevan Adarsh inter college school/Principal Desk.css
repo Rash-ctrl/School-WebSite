@@ -1,0 +1,120 @@
+/* hello */
+
+body{
+overflow-x: hidden;
+}
+
+
+.princepal-infor-box-dd{
+         width: 99%;
+         /* height: 50vh; */
+         background-color: #ffffff;
+         /* border: 2px solid black ; */
+         margin: 50px 8px;
+         display: flex;
+         flex-direction: column;
+}
+.litle-box-infor{
+         position: relative;
+         width: 100%;
+         height:50px ;
+         display: flex;
+         margin-left:10px ;
+}
+.bg-color{
+         position: relative;
+         width: 8px;
+         margin: 10px 8px;
+         height: 28px;
+         background-color: #8e1199;
+}
+.write-principal{
+         height: 41px;
+         
+         font-size: 20px;
+         font-weight: 800;
+         font-size: 1.5rem;
+         font-family: serif;
+         margin: 10px 10px 10px 0px;
+         color: rgb(42, 64, 83);
+         /* background:linear-gradient( to right, #da6f6f,#d3b6b6 ) ; */
+}
+.main-infor{
+         display: flex;
+
+}
+.image-section-pri{
+         width: 354vw;
+         height: auto-fit;
+         /* margin: 0px 15px 15px 15px ; */
+         overflow: hidden;
+         /* border-radius: 12px; */
+         padding: 10PX;
+}
+.image-section-pri img{
+position: relative;
+width: 100%;
+height: 100%;
+transition: 800ms;
+object-fit: cover;
+ overflow: hidden;
+/* &:hover{
+         transform: scale(1.2);
+        
+} */
+
+/* margin-top: ; */
+}
+.peragraph-principal-desk{
+         position: relative;
+         height: 100%;
+         /* width: ; */
+         margin: 40px;
+         text-align: justify;
+         line-height: 1.5;
+         /* font-size: ; */
+         /*  */
+         font-size: 0.85rem;
+         font-family: serif;
+         color: #b1b1b1;
+         transition: 300ms ease-in;
+         &:hover{
+                  color:#5c5a5a;
+         }
+}
+.peragraph-principal-desk h3{
+         color: #444444;
+         font-size: 1.2rem;
+         margin-bottom: 15px;
+}
+@media (max-width: 768px) {
+        .main-infor{
+         display: flex;
+         flex-direction: column;
+         padding: 10px;
+        } 
+        .image-section-pri{
+         width: 99%;
+         padding: 10px;
+                  /* margin: 0px 15px 15px 15px ; */
+        }
+        .write-principal{
+                height: 26px;
+                font-size: 18px;
+        }
+        .image-section-pri img{
+         border-radius: 12px;
+         /* aspect-ratio: 230.69/181.83; */
+        }
+        .peragraph-principal-desk{
+        margin: 14px 6px;
+        color: rgb(91, 85, 85);
+        }
+        
+}
+@media(max-width:480px){
+        .peragraph-principal-desk p{
+                font-size: 0.70em;
+                color:black;
+        }
+}

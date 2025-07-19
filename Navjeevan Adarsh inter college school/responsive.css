@@ -1,0 +1,348 @@
+ /* @media (max-width: 700px) {
+ .logo{height: 70px;
+  width: 45vw;}
+  .navimg{
+    height: 5vh;
+  }
+  .hero-slides{
+    max-width:700px ;
+    background-position: center;
+  background-size: cover;
+  }
+  marquee{
+    font-size: small;
+  }
+  
+} 
+@media(max-width: 700px){
+  .hero-img-01{
+    height: 13vh;
+  }
+ .nav-link-list{
+  overflow: scroll;
+ }
+  .navbarhead{
+    height: 6vh;
+  }
+  .navbarhead li{
+    
+    font-size: small;
+  }  
+  
+  .under-main1{
+     display: flex;
+     flex-direction: column;
+     align-items:center ;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+    }
+    .love{
+      margin-top: 20px;
+      max-width: 300px ;
+      margin-left: 15px;
+    }
+    .main-detalis1{
+      margin-left: 15px;
+    }
+    .image-about{
+      max-width: 300px;
+      margin: 0;
+    }
+    .image-about img{
+      max-width: 300px;
+    }
+    .peragraph-div-box1{
+      overflow-y:scroll ;
+      font-size: small;
+    }
+    .heading-with-blue{
+      max-width: 300px;
+    }
+  }
+   @media(max-width: 700px){
+  .image-area{
+    width: 100%;
+  }
+.fix-details-on-school{
+  margin: 20px 6px;
+padding: 0px 0px;
+}
+.details-image-inside{
+  flex-direction: column;
+}
+.image-area{
+  
+  height: 212px;
+}
+.pra-area h4{
+font-size: 14px;
+}
+.pra-area{
+  font-size: 10px;
+  margin: 14px 6px;
+}
+
+ }
+ @media (max-width: 700px) {
+  .Facilities-inside-overflow{
+ padding: 0px 0px;
+  }
+
+  .koi-baat-nhi{
+    width: 300px;
+    margin-top: 25px;
+  }
+  .Facilities-h2-blue-inside{
+    padding-left: 20px;
+  }
+}
+@media (min-width:700px ){
+.table-data-for-pc{
+  display: inline;
+  margin-bottom: 0;
+  position: relative;
+  height: 100%;
+} 
+}
+@media (max-width: 700px) {
+  .table-data-for-pc{
+    display: none;
+  }
+  
+  .min-viwe-details{
+    display: inline;
+    width: 100%;
+    margin-bottom: 0;
+    height:max-content;
+  }
+}
+@media (min-width:700px ){
+.min-viwe-details{
+  display: none;
+  background-color: #20232e;
+}
+}
+  */
+  /* Existing CSS remains above */
+
+/* ======================== */
+/* RESPONSIVE MEDIA QUERIES */
+/* ======================== */
+
+/* Tablets: 1024px and below */
+/* Existing CSS remains above */
+
+/* ======================== */
+/* RESPONSIVE MEDIA QUERIES */
+/* ======================== */
+
+/* Hamburger menu button */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #333;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+@media (max-width: 1024px) {
+  .navbarhead {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    position: relative;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-link-list {
+    display: none;
+    /* width: 100%; */
+    text-align: center;
+    background-color: #ffffff;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 999;
+    border-top: 1px solid #ddd;
+  }
+
+  .nav-link-list.show {
+    display: block;
+  }
+
+  .nav-link-list ul {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .nav-link-list ul li {
+    margin: 10px 0;
+  }
+
+  .hero-img-01, .hero-slides {
+    height: 60vh;
+  }
+
+  .love, .koi-baat-nhi {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .under-main1 {
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 15px;
+  }
+
+  .details-image-inside {
+    flex-direction: column;
+  }
+
+  .image-area, .pra-area {
+    width: 100%;
+    padding: 0;
+  }
+  .image-about{
+    height: 55%;
+  }
+  .downlode-hear-box {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    height: auto;
+  }
+
+  .downlode-hear-box button {
+    margin-top: 10px;
+  }
+
+  .Facilities-inside-overflow-02 {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .footer-div-op1 table tr td {
+    /* display: block; */
+    width: 100%;
+    padding: 10px 0;
+  }
+}
+
+/* Mobile: 768px and below */
+@media (max-width: 768px) {
+  .marque marquee {
+    width: 100%;
+    margin-left: 0;
+    font-size: 16px;
+  }
+  .image-about{
+    height: 55%;
+  }
+
+  .navimg {
+    height: 7vh;
+  }
+
+  .hero-img-01, .hero-slides {
+    height: 40vh;
+  }
+.pra-area{
+  margin: 0;
+}
+  .peragraph-div-box1 {
+    padding: 20px;
+  }
+
+  .Facilities-inside-overflow-02::-webkit-scrollbar {
+    display: none;
+  }
+
+  .footer-div-op1 {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  .downlode-hear-box h2 {
+    font-size: 1rem;
+  }
+
+  .downlode-hear-box button {
+    font-size: 1rem;
+    width: 100%;
+  }
+  .link-hover p{
+    line-height: 0.2;
+  }
+}
+@media(max-width: 480px ){
+  .logo{
+    padding-right: 115px;
+    margin-left: 0;
+  }
+    .image-about{
+    height: 35%;
+  }
+  .pra-area{
+    margin: 0;
+
+  }
+  
+.Facilities-inside-overflow-02{
+    flex-direction: column;
+}
+table h2{
+    font-size: 1.2rem;
+    width:200px;
+    margin-bottom: 5px;
+}
+.link-hover p{
+    width:235px;
+    line-height: 0;
+}
+.link-hover a{
+    display: block;
+    width:180px;
+    line-height: 0;
+    padding-left: 5px;
+}
+.icons i a{
+  display: inline;
+}
+/*  */
+.fa-youtube{
+    color:red;
+    cursor: pointer;
+  transform: scale(1.1);
+  display:inline-block;
+  }
+  .fa-instagram{
+  color :rgb(252, 73, 181);
+  cursor: pointer;
+  transform: scale(1.1);  
+}
+  .fa-facebook{
+    color:rgb(54, 110, 243);
+    cursor: pointer;
+  transform: scale(1.1);
+  }
+  .fa-whatsapp{
+    color:#25D366;
+  cursor: pointer;
+  transform: scale(1.1);
+  }
+      .footer-div-op1 table tr td{
+        display:block;
+      }
+}
